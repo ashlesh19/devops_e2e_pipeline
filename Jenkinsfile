@@ -17,10 +17,24 @@ pipeline {
 
         stage('Checkout from SCM-github') {
             steps {
-                //Builtin method for leaning up workspace
+                //SCM used to fetch our jenkins file 
                git branch: 'master', credentialsId: 'github', url: 'https://github.com/ashlesh19/devops_e2e_pipeline'
             }
         }
+               
+        
+         stage("Build Application"){
+            steps {
+                sh "mvn clean package"
+            }
+
+        }
+
+        stage("Test Application"){
+            steps {
+                sh "mvn test"
+            }
+
 
     }
 
