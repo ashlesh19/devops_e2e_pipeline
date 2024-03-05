@@ -16,8 +16,6 @@ pipeline {
             }
         }
 
-    }
-        stages {
         stage('Checkout from SCM-github') {
             steps {
                 //Builtin method for leaning up workspace
