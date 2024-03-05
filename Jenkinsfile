@@ -11,7 +11,7 @@ pipeline {
         stage('Clean Up Worskapce') {
             steps {
                 //Builtin method for leaning up workspace
-                cleansWS()
+                cleanWS()
             }
         }
 
