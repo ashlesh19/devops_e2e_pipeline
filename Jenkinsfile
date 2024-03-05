@@ -19,7 +19,7 @@ pipeline {
         stage('Checkout from SCM-github') {
             steps {
                 //Builtin method for leaning up workspace
-               git bracnh: 'main', credentialsId: 'github', url: 'https://github.com/ashlesh19/devops_e2e_pipeline'
+               git bracnh: 'master', credentialsId: 'github', url: 'https://github.com/ashlesh19/devops_e2e_pipeline'
             }
         }
 
