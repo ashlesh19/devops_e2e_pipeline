@@ -6,6 +6,14 @@ pipeline {
     tools{
         maven "Maven3"
     }
+    environment{
+        APP_NAME = "devops_e2e_pipeline"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "ashlesh1910"
+        DOCKER_PASS = 'dockerhub-token'
+        IMAGE_NAME = "${DOCKER_USER}"+ "/" +"${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+    }
 
     stages {
         stage('Clean Up Worskapce') {
@@ -53,7 +61,23 @@ pipeline {
                 }
             }
 
-        }  
+        }
+        
+        stage("Build & Push Docker Image") {
+            steps {
+                script {
+                    docker.withRegistry('',DOCKER_PASS) {
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+
+                    docker.withRegistry('',DOCKER_PASS) {
+                        docker_image.push("${IMAGE_TAG}")
+                        docker_image.push('latest')
+                    }
+                }
+            }
+
+        }
 
 
 
